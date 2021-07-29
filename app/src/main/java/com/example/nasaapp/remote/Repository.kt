@@ -1,19 +1,20 @@
-package com.example.nasaapp
+package com.example.nasaapp.remote
 
-import android.util.Log
-import com.example.myapp.Dao.AstronomyDao
+import com.example.nasaapp.db.AstronomyDao
+import com.example.nasaapp.model.Response
+import com.example.nasaapp.model.State
+import com.example.nasaapp.util.Constant
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Repository @Inject constructor(private val apiService: ApiService,private val astronomyDao: AstronomyDao) {
+class Repository @Inject constructor(private val apiService: ApiService, private val astronomyDao: AstronomyDao) {
 
    fun getAstronomyData(): Flow<State<Response>> {
-        return object :NetWorkRepository<Response,Response>() {
+        return object : NetWorkRepository<Response, Response>() {
 
             override suspend fun fetchFromRemote(): Response {
                 return getApiResponse()
@@ -34,7 +35,7 @@ class Repository @Inject constructor(private val apiService: ApiService,private 
         }.asFlow.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getApiResponse():Response {
+    suspend fun getApiResponse(): Response {
         return apiService.getAstronomyInfo(Constant.API_KEY)
     }
 }

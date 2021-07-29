@@ -1,4 +1,4 @@
-package com.example.nasaapp
+package com.example.nasaapp.model
 
 sealed class State<T> {
 

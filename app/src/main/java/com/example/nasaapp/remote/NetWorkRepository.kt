@@ -1,7 +1,8 @@
-package com.example.nasaapp
+package com.example.nasaapp.remote
 
 import android.util.Log
-import kotlinx.coroutines.CancellationException
+import com.example.nasaapp.model.Response
+import com.example.nasaapp.model.State
 import kotlinx.coroutines.flow.*
 
 abstract class NetWorkRepository<RESULT, REQUEST> {

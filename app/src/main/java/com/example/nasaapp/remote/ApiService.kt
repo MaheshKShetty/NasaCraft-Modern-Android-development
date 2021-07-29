@@ -1,5 +1,6 @@
-package com.example.nasaapp
+package com.example.nasaapp.remote
 
+import com.example.nasaapp.model.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query

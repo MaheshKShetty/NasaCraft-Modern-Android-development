@@ -2,15 +2,15 @@ package com.example.nasaapp
 
 import android.content.Context
 import androidx.work.*
-import com.example.myapp.Dao.AstronomyDao
+import com.example.nasaapp.db.AstronomyDao
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collect
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 @Singleton
-class DBDeleteWorkManager @Inject constructor(private val astronomyDao: AstronomyDao) {
+class DBDeleteWorkManager @Inject constructor( val astronomyDao: AstronomyDao) {
 
     fun createTaskToDeleteDb(context: Context) {
 
@@ -36,11 +36,15 @@ class DBDeleteWorkManager @Inject constructor(private val astronomyDao: Astronom
 
 }
 
-class DeleteDBWorkManager(var context: Context, workerParams: WorkerParameters) : CoroutineWorker(
+class DeleteDBWorkManager(var context: Context, workerParams: WorkerParameters,val astronomyDao: AstronomyDao) : CoroutineWorker(
     context,
     workerParams) {
 
     override suspend fun doWork():  Result = coroutineScope {
+        val response = astronomyDao.getAstronomy()
+        response.collect {
+            astronomyDao.deleteAll(response = it)
+        }
         Result.success()
     }
 

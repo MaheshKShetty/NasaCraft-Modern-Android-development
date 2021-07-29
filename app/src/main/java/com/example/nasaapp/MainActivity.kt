@@ -1,21 +1,18 @@
 package com.example.nasaapp
 
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.work.WorkManager
-import com.example.myapp.Dao.AstronomyDao
+import com.example.nasaapp.model.State
+import com.example.nasaapp.util.NetworkUtils
+import com.example.nasaapp.viewmodel.AstronomyViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.Calendar.getInstance
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

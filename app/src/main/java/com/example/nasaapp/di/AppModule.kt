@@ -1,14 +1,15 @@
-package com.example.nasaapp
+package com.example.nasaapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.myapp.Dao.AstronomyDao
-import com.example.myapp.Dao.AstronomyDb
-import com.example.nasaapp.Constant.TABLE_NAME
+import com.example.nasaapp.db.AstronomyDao
+import com.example.nasaapp.db.AstronomyDb
+import com.example.nasaapp.util.Constant.TABLE_NAME
+import com.example.nasaapp.remote.ApiService
+import com.example.nasaapp.util.Constant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -56,7 +57,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideResturantDataBase(@ApplicationContext appContext: Context): AstronomyDb
-            = Room.databaseBuilder(appContext,AstronomyDb::class.java,TABLE_NAME).build()
+            = Room.databaseBuilder(appContext, AstronomyDb::class.java,TABLE_NAME).build()
 
     @Singleton
     @Provides

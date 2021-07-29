@@ -1,4 +1,4 @@
-package com.example.nasaapp
+package com.example.nasaapp.util
 
 import android.content.Context
 import android.net.ConnectivityManager

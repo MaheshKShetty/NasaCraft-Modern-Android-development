@@ -1,4 +1,4 @@
-package com.example.nasaapp
+package com.example.nasaapp.util
 
 object Constant {
     const val TABLE_NAME ="Response"

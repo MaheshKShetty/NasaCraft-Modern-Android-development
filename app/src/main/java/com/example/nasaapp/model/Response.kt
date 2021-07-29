@@ -1,4 +1,4 @@
-package com.example.nasaapp
+package com.example.nasaapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
