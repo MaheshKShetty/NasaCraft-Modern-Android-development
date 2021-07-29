@@ -1,5 +1,6 @@
 package com.example.nasaapp
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AstronomyViewModel @Inject constructor(private val repository: Repository): ViewModel() {
+class AstronomyViewModel @Inject constructor(private val repository: Repository,val dbDeleteWorkManager: DBDeleteWorkManager): ViewModel() {
 
     var astronomyData =  MutableLiveData<State<Response>>()
 
@@ -25,6 +26,11 @@ class AstronomyViewModel @Inject constructor(private val repository: Repository)
                 astronomyData.postValue(data)
             }
         }
+    }
+
+    fun clearLocalData(context: Context) {
+        // here based on time if time is 12 then we can create a work to delete the data from database
+        dbDeleteWorkManager.createTaskToDeleteDb(context)
     }
 
 }

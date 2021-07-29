@@ -9,21 +9,28 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.work.WorkManager
+import com.example.myapp.Dao.AstronomyDao
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.Calendar.getInstance
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val astronomyViewModel: AstronomyViewModel by viewModels()
+    private lateinit var workManager: WorkManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        workManager = WorkManager.getInstance(this)
         getAstronomyData()
         observeModels()
         handleNetworkChanges()
+        astronomyViewModel.clearLocalData(this)
     }
 
     private fun getAstronomyData() {
