@@ -1,17 +1,17 @@
 package com.example.nasaapp
 
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.launch
-import java.net.URL
-
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -23,11 +23,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         getAstronomyData()
         observeModels()
+        handleNetworkChanges()
     }
 
     private fun getAstronomyData() {
         astronomyViewModel.getAstronomyResponse()
     }
+
+    private fun handleNetworkChanges() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.let {
+                NetworkUtils.getNetworkLiveData(it).observe(this, { isConnected ->
+                    if (isConnected) {
+                         getAstronomyData()
+                    } else {
+                        Toast.makeText(this,getString(R.string.no_internet),Toast.LENGTH_LONG).show()
+                    }
+                })
+            }
+        }
+    }
+
 
     private fun observeModels() {
 
@@ -46,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                     pgBar.visibility = View.VISIBLE
                 }
                 is State.Error -> {
-
+                   Toast.makeText(this,getString(R.string.somethin_wrong),Toast.LENGTH_LONG).show()
                 }
             }
         })

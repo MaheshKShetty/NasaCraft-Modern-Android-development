@@ -27,6 +27,10 @@ class Repository @Inject constructor(private val apiService: ApiService,private 
                 return astronomyDao.getAstronomy()
             }
 
+            override suspend fun getLocalData(): Flow<Response?> {
+                return astronomyDao.getAstronomy()
+            }
+
         }.asFlow.flowOn(Dispatchers.IO)
     }
 
