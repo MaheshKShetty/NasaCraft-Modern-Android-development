@@ -5,9 +5,9 @@ import com.example.nasaapp.model.Response
 import com.example.nasaapp.model.State
 import kotlinx.coroutines.flow.*
 
-abstract class NetWorkRepository<RESULT, REQUEST> {
+abstract class BaseRepo<RESULT, REQUEST> {
 
-    val asFlow = flow<State<RESULT>> {
+    val asFlow = flow {
         emit(State.loading())
         val localData = getLocalData()
         localData.collect {  response ->
@@ -22,7 +22,6 @@ abstract class NetWorkRepository<RESULT, REQUEST> {
                 State.success<RESULT>(it)
             })
         }
-
     }
 
      abstract suspend fun saveLocally(response: Response)

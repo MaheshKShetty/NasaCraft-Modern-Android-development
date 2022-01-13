@@ -17,7 +17,7 @@ class DBDeleteWorkManager @Inject constructor( val astronomyDao: AstronomyDao) {
         // task will get updated for every 6 hours this can be modified based on the conditions
         val workRequest = PeriodicWorkRequest.Builder(
             DeleteDBWorkManager::class.java,
-            1,
+            2,
             TimeUnit.HOURS,
             PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS,
             TimeUnit.MILLISECONDS
@@ -36,9 +36,8 @@ class DBDeleteWorkManager @Inject constructor( val astronomyDao: AstronomyDao) {
 
 }
 
-class DeleteDBWorkManager(var context: Context, workerParams: WorkerParameters,val astronomyDao: AstronomyDao) : CoroutineWorker(
-    context,
-    workerParams) {
+class DeleteDBWorkManager(var context: Context, workerParams: WorkerParameters,val astronomyDao: AstronomyDao) :
+    CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork():  Result = coroutineScope {
         val response = astronomyDao.getAstronomy()

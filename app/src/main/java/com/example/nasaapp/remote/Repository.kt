@@ -14,7 +14,7 @@ import javax.inject.Singleton
 class Repository @Inject constructor(private val apiService: ApiService, private val astronomyDao: AstronomyDao) {
 
    fun getAstronomyData(): Flow<State<Response>> {
-        return object : NetWorkRepository<Response, Response>() {
+        return object : BaseRepo <Response, Response>() {
 
             override suspend fun fetchFromRemote(): Response {
                 return getApiResponse()
