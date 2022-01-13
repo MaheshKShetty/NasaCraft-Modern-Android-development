@@ -16,5 +16,5 @@ coroutines
 
 Flow Api
 
-API : To get the Api keys create an Account - > https://api.nasa.gov/planetar
+API : To get the Api keys create an Account - > https://api.nasa.gov/
 
