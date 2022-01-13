@@ -47,6 +47,4 @@ class DeleteDBWorkManager(var context: Context, workerParams: WorkerParameters,v
         }
         Result.success()
     }
-
-
 }

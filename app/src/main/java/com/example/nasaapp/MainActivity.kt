@@ -58,7 +58,8 @@ class MainActivity : AppCompatActivity() {
                       pgBar.visibility = View.GONE
                       tvTitle.text = it.title
                       tvExplaination.text = it.explanation
-                      Picasso.get().load(it.hdurl).placeholder(R.drawable.ic_broken_image)
+                      Picasso.get().load(it.hdurl).
+                            placeholder(R.drawable.progress_animation)
                           .error(R.drawable.ic_broken_image).into(ivImage)
                   }
                 }
