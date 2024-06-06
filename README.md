@@ -21,7 +21,7 @@ Getting Started
 Clone the repository:
 
 Bash
-git clone https://github.com/your-username/nasa-image-app.git
+git clone https://github.com/MaheshKShetty/nasa-image-app.git
 Use code with caution.
 content_copy
 Set up your environment:
